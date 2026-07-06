@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* カシャカシャおもちゃ：タップで弾ける光の演出 */
+@keyframes kasha-pop {
+  0% { transform: translate(-50%, -50%) scale(0.2) rotate(var(--kasha-rot, 0deg)); opacity: 0; }
+  25% { opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(1.15) rotate(calc(var(--kasha-rot, 0deg) + 18deg)); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.6) rotate(calc(var(--kasha-rot, 0deg) + 36deg)); opacity: 0; }
+}
+.kasha-pop {
+  animation: kasha-pop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes kasha-sparkle {
+  0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.3) translateY(-28px); opacity: 0; }
+}
+.kasha-sparkle {
+  animation: kasha-sparkle 0.85s ease-out forwards;
+}
+
+@keyframes kasha-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.kasha-shimmer {
+  background-size: 200% 200%;
+  animation: kasha-shimmer 6s ease-in-out infinite;
+}
+
+@keyframes kasha-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+.kasha-breathe {
+  animation: kasha-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes kasha-wiggle {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+.kasha-wiggle {
+  animation: kasha-wiggle 1.6s ease-in-out infinite;
+}
+
+/* 背景をゆっくり漂う装飾 */
+@keyframes kasha-drift {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(8deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+.kasha-drift {
+  animation: kasha-drift 5s ease-in-out infinite;
+}
+
+/* きらきら瞬く装飾 */
+@keyframes kasha-twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+.kasha-twinkle {
+  animation: kasha-twinkle 2.2s ease-in-out infinite;
+}
+
+/* 紙吹雪：外側へ飛び散る */
+@keyframes kasha-confetti {
+  0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  20% { opacity: 1; }
+  100% {
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(1) rotate(var(--cr, 180deg));
+    opacity: 0;
+  }
+}
+.kasha-confetti {
+  animation: kasha-confetti 1s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+/* マスコットのぴょこぴょこ */
+@keyframes kasha-hop {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  30% { transform: translateY(-18px) rotate(4deg); }
+  55% { transform: translateY(-4px) rotate(-2deg); }
+}
+.kasha-hop {
+  animation: kasha-hop 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kasha-pop,
+  .kasha-sparkle,
+  .kasha-shimmer,
+  .kasha-breathe,
+  .kasha-wiggle,
+  .kasha-drift,
+  .kasha-twinkle,
+  .kasha-confetti,
+  .kasha-hop {
+    animation: none;
+  }
+}
